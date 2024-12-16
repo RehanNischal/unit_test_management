@@ -1,0 +1,1 @@
+DATABASE_URL = "sqlite:///./data/test_management.db"
