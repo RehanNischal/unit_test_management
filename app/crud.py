@@ -52,3 +52,12 @@ def update_test_run(db: Session, test_run_id: int, result: str, end_time: dateti
     db.commit()
     db.refresh(db_test_run)
     return db_test_run
+
+def delete_test_run(db: Session, test_run_id: int):
+    test_run = db.query(TestRun).filter(TestRun.id == test_run_id).first()
+    if test_run:
+        db.delete(test_run)
+        db.commit()
+        return {"message": "Test run deleted successfully", "id": test_run.id}
+    else:
+        return {"message": "Test run not found", "id": test_run_id}

@@ -14,7 +14,9 @@ class TestSuite(Base):
     status = Column(String, default="active")
 
     # Relationship with TestCase
+    # A TestSuite can have many TestCases
     test_cases = relationship("TestCase", back_populates="test_suite")
+    # A TestSuite can have many TestRuns
     test_runs = relationship("TestRun", back_populates="test_suite")
 
 class TestCase(Base):
@@ -31,6 +33,7 @@ class TestCase(Base):
     expected_outcome = Column(String)
 
     # Relationship with TestSuite
+    # Each TestCase belongs to one TestSuite
     test_suite = relationship("TestSuite", back_populates="test_cases")
 
 class TestRun(Base):
@@ -45,4 +48,5 @@ class TestRun(Base):
     test_results = Column(JSON, default=[])  # List of results for each test case, e.g., [{'test_case_id': 1, 'status': 'pass'}, ...]
 
     # Relationship with TestSuite
+    # Each TestRun belongs to one TestSuite
     test_suite = relationship("TestSuite", back_populates="test_runs")
