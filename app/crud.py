@@ -25,6 +25,15 @@ def update_test_suite(db: Session, test_suite_id: int, name: str, status: str, d
     db.refresh(db_test_suite)
     return db_test_suite
 
+def delete_test_suite(db: Session, test_suite_id: int):
+    test_suite = db.query(TestSuite).filter(TestSuite.id == test_suite_id).first()
+    if test_suite:
+        db.delete(test_suite)
+        db.commit()
+        return {"message": "Test Suite deleted successfully", "id": test_suite.id}
+    else:
+        return {"message": "Test Suite not found", "id": test_suite.id}
+
 # CRUD operations for Test Case
 def create_test_case(db: Session, name: str, description: str, test_suite_id: int, priority: str, expected_outcome: str):
     db_test_case = TestCase(name=name, description=description, test_suite_id=test_suite_id, priority=priority, expected_outcome=expected_outcome)
@@ -48,6 +57,15 @@ def update_test_case(db: Session, test_case_id: int, name: str, description: str
     db.commit()
     db.refresh(db_test_case)
     return db_test_case
+
+def delete_test_case(db: Session, test_case_id: int):
+    test_case = db.query(TestCase).filter(TestCase.id == test_case_id).first()
+    if test_case:
+        db.delete(test_case)
+        db.commit()
+        return {"message": "Test Case deleted successfully", "id": test_case.id}
+    else:
+        return {"message": "Test Case not found", "id": test_case.id}
 
 # CRUD operations for Test Run
 def create_test_run(db: Session, test_suite_id: int, run_status: str):

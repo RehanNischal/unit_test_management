@@ -2,7 +2,7 @@ from datetime import datetime
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from app.crud import create_test_suite, get_test_suites, get_test_suite, update_test_suite
+from app.crud import create_test_suite, get_test_suites, get_test_suite, update_test_suite, delete_test_suite
 from app.schemas import TestSuiteCreate, TestSuiteResponse, TestSuiteUpdate
 from app.database import get_db
 
@@ -35,4 +35,11 @@ def update_suite(test_suite_id: int, test_suite_update: TestSuiteUpdate, db: Ses
         name = test_suite_update.name,
         status=test_suite_update.status,
         description=test_suite_update.description
+    )
+
+@router.delete("/{test_suite_id}")
+def delete_suite(test_suite_id: int, db: Session = Depends(get_db)):
+    return delete_test_suite(
+        db=db,
+        test_suite_id= test_suite_id
     )

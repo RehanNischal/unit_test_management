@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from app.crud import create_test_case, get_test_cases, get_test_case, update_test_case
+from app.crud import create_test_case, get_test_cases, get_test_case, update_test_case, delete_test_case
 from app.schemas import TestCaseCreate, TestCaseResponse, TestCaseUpdate
 from app.database import get_db
 
@@ -37,3 +37,10 @@ def update_case(test_case_id: int, test_case_update: TestCaseUpdate, db: Session
         priority = test_case_update.priority,
         description = test_case_update.description,
         expected_outcome = test_case_update.expected_outcome)
+
+@router.delete("/{test_case_id}")
+def delete_suite(test_case_id: int, db: Session = Depends(get_db)):
+    return delete_test_case(
+        db=db,
+        test_case_id= test_case_id
+    )
