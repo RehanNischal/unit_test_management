@@ -30,13 +30,17 @@ def read_test_case(test_case_id: int, db: Session = Depends(get_db)):
 
 @router.put("/{test_case_id}", response_model=TestCaseResponse)
 def update_case(test_case_id: int, test_case_update: TestCaseUpdate, db: Session = Depends(get_db)):
-    return update_test_case(
+    response = update_test_case(
         db = db,
         test_case_id = test_case_id,
         name = test_case_update.name,
         priority = test_case_update.priority,
         description = test_case_update.description,
         expected_outcome = test_case_update.expected_outcome)
+    if response:
+        return response
+    elif response == {}:
+        raise Exception("Test Case not found with id: {}".format(test_case_id))
 
 @router.delete("/{test_case_id}")
 def delete_suite(test_case_id: int, db: Session = Depends(get_db)):

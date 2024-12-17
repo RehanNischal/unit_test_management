@@ -18,12 +18,15 @@ def get_test_suite(db: Session, test_suite_id: int):
 
 def update_test_suite(db: Session, test_suite_id: int, name: str, status: str, description: str):
     db_test_suite = db.query(TestSuite).filter(TestSuite.id == test_suite_id).first()
-    db_test_suite.status = status
-    db_test_suite.name = name
-    db_test_suite.description = description
-    db.commit()
-    db.refresh(db_test_suite)
-    return db_test_suite
+    if db_test_suite:
+        db_test_suite.status = status
+        db_test_suite.name = name
+        db_test_suite.description = description
+        db.commit()
+        db.refresh(db_test_suite)
+        return db_test_suite
+    else:
+        return {}
 
 def delete_test_suite(db: Session, test_suite_id: int):
     test_suite = db.query(TestSuite).filter(TestSuite.id == test_suite_id).first()
@@ -32,7 +35,7 @@ def delete_test_suite(db: Session, test_suite_id: int):
         db.commit()
         return {"message": "Test Suite deleted successfully", "id": test_suite.id}
     else:
-        return {"message": "Test Suite not found", "id": test_suite.id}
+        return {"message": "Test Suite not found", "id": test_suite_id}
 
 # CRUD operations for Test Case
 def create_test_case(db: Session, name: str, description: str, test_suite_id: int, priority: str, expected_outcome: str):
@@ -50,13 +53,16 @@ def get_test_case(db: Session, test_case_id: int):
 
 def update_test_case(db: Session, test_case_id: int, name: str, description: str, priority: str, expected_outcome: str):
     db_test_case = db.query(TestCase).filter(TestCase.id == test_case_id).first()
-    db_test_case.name = name
-    db_test_case.description = description
-    db_test_case.priority = priority
-    db_test_case.expected_outcome = expected_outcome
-    db.commit()
-    db.refresh(db_test_case)
-    return db_test_case
+    if db_test_case:
+        db_test_case.name = name
+        db_test_case.description = description
+        db_test_case.priority = priority
+        db_test_case.expected_outcome = expected_outcome
+        db.commit()
+        db.refresh(db_test_case)
+        return db_test_case
+    else:
+        return {}
 
 def delete_test_case(db: Session, test_case_id: int):
     test_case = db.query(TestCase).filter(TestCase.id == test_case_id).first()
@@ -65,7 +71,7 @@ def delete_test_case(db: Session, test_case_id: int):
         db.commit()
         return {"message": "Test Case deleted successfully", "id": test_case.id}
     else:
-        return {"message": "Test Case not found", "id": test_case.id}
+        return {"message": "Test Case not found", "id": test_case_id}
 
 # CRUD operations for Test Run
 def create_test_run(db: Session, test_suite_id: int, run_status: str):
@@ -83,12 +89,15 @@ def get_test_run(db: Session, test_run_id: int):
 
 def update_test_run(db: Session, test_run_id: int, result: str, end_time: datetime, test_results: list):
     db_test_run = db.query(TestRun).filter(TestRun.id == test_run_id).first()
-    db_test_run.result = result
-    db_test_run.end_time = end_time
-    db_test_run.test_results = test_results
-    db.commit()
-    db.refresh(db_test_run)
-    return db_test_run
+    if db_test_run:
+        db_test_run.result = result
+        db_test_run.end_time = end_time
+        db_test_run.test_results = test_results
+        db.commit()
+        db.refresh(db_test_run)
+        return db_test_run
+    else:
+        return {}
 
 def delete_test_run(db: Session, test_run_id: int):
     test_run = db.query(TestRun).filter(TestRun.id == test_run_id).first()

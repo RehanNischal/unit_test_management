@@ -1,4 +1,3 @@
-from datetime import datetime
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
@@ -25,17 +24,23 @@ def read_test_suites(db: Session = Depends(get_db)):
 
 @router.get("/{test_suite_id}", response_model=TestSuiteResponse)
 def read_test_suite(test_suite_id: int, db: Session = Depends(get_db)):
-    return get_test_suite(db=db, test_suite_id=test_suite_id)
+    response = get_test_suite(db=db, test_suite_id=test_suite_id)
+    return response
+
 
 @router.put("/{test_suite_id}", response_model=TestSuiteResponse)
 def update_suite(test_suite_id: int, test_suite_update: TestSuiteUpdate, db: Session = Depends(get_db)):
-    return update_test_suite(
+    response = update_test_suite(
         db=db,
         test_suite_id= test_suite_id,
         name = test_suite_update.name,
         status=test_suite_update.status,
         description=test_suite_update.description
     )
+    if response:
+        return response
+    elif response == {}:
+        raise Exception("Test Suit not found with id: {}".format(test_suite_id))
 
 @router.delete("/{test_suite_id}")
 def delete_suite(test_suite_id: int, db: Session = Depends(get_db)):

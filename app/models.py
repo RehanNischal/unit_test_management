@@ -41,11 +41,11 @@ class TestRun(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     test_suite_id = Column(Integer, ForeignKey("test_suites.id"))
-    run_status = Column(String, default="in_progress")  # Example: 'in_progress', 'completed', 'failed'
-    result = Column(String, default="pending")  # Example: 'passed', 'failed', 'skipped'
+    run_status = Column(String, default="in_progress")
+    result = Column(String, default="pending")
     start_time = Column(DateTime, default=datetime.utcnow)
     end_time = Column(DateTime, nullable=True)
-    test_results = Column(JSON, default=[])  # List of results for each test case, e.g., [{'test_case_id': 1, 'status': 'pass'}, ...]
+    test_results = Column(JSON, default=[])
 
     # Relationship with TestSuite
     # Each TestRun belongs to one TestSuite

@@ -1,4 +1,3 @@
-from http.client import HTTPException
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
@@ -23,23 +22,22 @@ def read_runs(db: Session = Depends(get_db)):
 def read_run(test_run_id: int, db: Session = Depends(get_db)):
     return get_test_run(db=db, test_run_id=test_run_id)
 
-
-
 @router.put("/{test_run_id}", response_model=TestRunResponse)
 def update_run(test_run_id: int, test_run_update: TestRunUpdate, db: Session = Depends(get_db)):
-    return update_test_run(
+    response = update_test_run(
         db=db, test_run_id=test_run_id,
         result=test_run_update.result,
         end_time=test_run_update.end_time,
         test_results=test_run_update.test_results
     )
+    if response:
+        return response
+    elif response == {}:
+        raise Exception("Test Run not found with id: {}".format(test_run_id))
+
 
 @router.delete("/{test_run_id}")
 def delete_run(test_run_id: int, db: Session = Depends(get_db)):
-    result = delete_test_run(db=db, test_run_id=test_run_id)
-    if "Test run deleted successfully" in result["message"]:
-        return result
-    else:
-        raise HTTPException(status_code=404, detail=result["message"])
+    return delete_test_run(db=db, test_run_id=test_run_id)
 
 
