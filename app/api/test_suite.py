@@ -1,7 +1,9 @@
+from datetime import datetime
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from app.crud import create_test_suite, get_test_suites, get_test_suite
-from app.schemas import TestSuiteCreate, TestSuiteResponse
+from app.crud import create_test_suite, get_test_suites, get_test_suite, update_test_suite
+from app.schemas import TestSuiteCreate, TestSuiteResponse, TestSuiteUpdate
 from app.database import get_db
 
 router = APIRouter(
@@ -24,3 +26,13 @@ def read_test_suites(db: Session = Depends(get_db)):
 @router.get("/{test_suite_id}", response_model=TestSuiteResponse)
 def read_test_suite(test_suite_id: int, db: Session = Depends(get_db)):
     return get_test_suite(db=db, test_suite_id=test_suite_id)
+
+@router.put("/{test_suite_id}", response_model=TestSuiteResponse)
+def update_suite(test_suite_id: int, test_suite_update: TestSuiteUpdate, db: Session = Depends(get_db)):
+    return update_test_suite(
+        db=db,
+        test_suite_id= test_suite_id,
+        name = test_suite_update.name,
+        status=test_suite_update.status,
+        description=test_suite_update.description
+    )

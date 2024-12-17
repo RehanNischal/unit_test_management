@@ -16,6 +16,15 @@ def get_test_suites(db: Session):
 def get_test_suite(db: Session, test_suite_id: int):
     return db.query(TestSuite).filter(TestSuite.id == test_suite_id).first()
 
+def update_test_suite(db: Session, test_suite_id: int, name: str, status: str, description: str):
+    db_test_suite = db.query(TestSuite).filter(TestSuite.id == test_suite_id).first()
+    db_test_suite.status = status
+    db_test_suite.name = name
+    db_test_suite.description = description
+    db.commit()
+    db.refresh(db_test_suite)
+    return db_test_suite
+
 # CRUD operations for Test Case
 def create_test_case(db: Session, name: str, description: str, test_suite_id: int, priority: str, expected_outcome: str):
     db_test_case = TestCase(name=name, description=description, test_suite_id=test_suite_id, priority=priority, expected_outcome=expected_outcome)
@@ -29,6 +38,16 @@ def get_test_cases(db: Session, test_suite_id: int):
 
 def get_test_case(db: Session, test_case_id: int):
     return db.query(TestCase).filter(TestCase.id == test_case_id).first()
+
+def update_test_case(db: Session, test_case_id: int, name: str, description: str, priority: str, expected_outcome: str):
+    db_test_case = db.query(TestCase).filter(TestCase.id == test_case_id).first()
+    db_test_case.name = name
+    db_test_case.description = description
+    db_test_case.priority = priority
+    db_test_case.expected_outcome = expected_outcome
+    db.commit()
+    db.refresh(db_test_case)
+    return db_test_case
 
 # CRUD operations for Test Run
 def create_test_run(db: Session, test_suite_id: int, run_status: str):

@@ -18,6 +18,12 @@ class TestSuiteResponse(BaseModel):
     class Config:
         orm_mode = True
 
+class TestSuiteUpdate(BaseModel):
+    status: str
+    name: str
+    description: str
+
+
     # Test Case Schema
 class TestCaseCreate(BaseModel):
     name: str
@@ -39,6 +45,13 @@ class TestCaseResponse(BaseModel):
 
     class Config:
         orm_mode = True
+
+class TestCaseUpdate(BaseModel):
+    name: str
+    description: str
+    priority: str
+    expected_outcome: str
+
 
 # Test Run Schema
 class TestRunCreate(BaseModel):

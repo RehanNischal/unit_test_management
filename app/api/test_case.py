@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from app.crud import create_test_case, get_test_cases, get_test_case
-from app.schemas import TestCaseCreate, TestCaseResponse
+from app.crud import create_test_case, get_test_cases, get_test_case, update_test_case
+from app.schemas import TestCaseCreate, TestCaseResponse, TestCaseUpdate
 from app.database import get_db
 
 router = APIRouter(
@@ -27,3 +27,13 @@ def read_test_cases(test_suite_id: int, db: Session = Depends(get_db)):
 @router.get("/{test_case_id}", response_model=TestCaseResponse)
 def read_test_case(test_case_id: int, db: Session = Depends(get_db)):
     return get_test_case(db=db, test_case_id=test_case_id)
+
+@router.put("/{test_case_id}", response_model=TestCaseResponse)
+def update_case(test_case_id: int, test_case_update: TestCaseUpdate, db: Session = Depends(get_db)):
+    return update_test_case(
+        db = db,
+        test_case_id = test_case_id,
+        name = test_case_update.name,
+        priority = test_case_update.priority,
+        description = test_case_update.description,
+        expected_outcome = test_case_update.expected_outcome)
