@@ -1,8 +1,8 @@
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from app.crud import create_test_run, get_test_runs, get_test_run, update_test_run, delete_test_run
-from app.schemas import TestRunCreate, TestRunResponse, TestRunUpdate
+from app.crud.test_run_crud import create_test_run, get_test_runs, get_test_run, update_test_run, delete_test_run
+from app.schemas.test_run_schema import TestRunCreate, TestRunResponse, TestRunUpdate
 from app.database import get_db
 
 router = APIRouter(

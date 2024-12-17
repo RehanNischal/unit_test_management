@@ -2,6 +2,7 @@ from fastapi import HTTPException
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 from app import config
+from app import constants
 
 SQLALCHEMY_DATABASE_URL = config.DATABASE_URL
 
@@ -22,8 +23,8 @@ def get_db():
     try:
         yield db
     except Exception as e:
-        if "validation" in str(e):
-            raise HTTPException(status_code=400, detail="Invalid Input!")
+        if constants.VALIDATION_ERROR in str(e):
+            raise HTTPException(status_code=400, detail=constants.INVALID_INPUT)
         else:
             raise HTTPException(status_code=400, detail="{}".format(str(e)))
     finally:

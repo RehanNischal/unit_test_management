@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from app.api import test_suite, test_case, test_run
-from app.database import engine
-from app.models import Base
+from app.database import engine, Base
+
 
 # Initializing FastAPI app
 app = FastAPI()
