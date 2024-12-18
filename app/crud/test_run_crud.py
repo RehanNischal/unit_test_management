@@ -12,7 +12,8 @@ def create_test_run(db: Session, test_suite_id: int, run_status: str):
     return db_test_run
 
 def get_test_runs(db: Session):
-    return db.query(TestRun).all()
+    return db.query(TestRun).filter(TestRun.test_suite_id.isnot(None)).all()
+
 
 def get_test_run(db: Session, test_run_id: int):
     return db.query(TestRun).filter(TestRun.id == test_run_id).first()

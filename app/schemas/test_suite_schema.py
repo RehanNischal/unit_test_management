@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import List, Optional
 
 # Test Suite Schema
 class TestSuiteCreate(BaseModel):

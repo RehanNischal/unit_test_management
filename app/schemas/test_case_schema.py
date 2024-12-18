@@ -1,8 +1,5 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import List, Optional
-
-
 
 # Test Case Schema
 class TestCaseCreate(BaseModel):
@@ -31,3 +28,4 @@ class TestCaseUpdate(BaseModel):
     description: str
     priority: str
     expected_outcome: str
+

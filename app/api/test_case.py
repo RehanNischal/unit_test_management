@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from app.crud.test_case_crud import create_test_case, get_test_cases, get_test_case, update_test_case, delete_test_case
+from app.crud.test_case_crud import create_test_case, get_test_cases, get_test_case, update_test_case, delete_test_case, \
+    search_test_cases
 from app.schemas.test_case_schema import TestCaseCreate, TestCaseResponse, TestCaseUpdate
 from app.database import get_db
 
@@ -43,8 +44,12 @@ def update_case(test_case_id: int, test_case_update: TestCaseUpdate, db: Session
         raise Exception("Test Case not found with id: {}".format(test_case_id))
 
 @router.delete("/{test_case_id}")
-def delete_suite(test_case_id: int, db: Session = Depends(get_db)):
+def delete_case(test_case_id: int, db: Session = Depends(get_db)):
     return delete_test_case(
         db=db,
         test_case_id= test_case_id
     )
+
+@router.get("/search/", response_model=list[TestCaseResponse])
+def search_cases(keyword: str, db: Session = Depends(get_db)):
+    return search_test_cases(db=db, keyword=keyword)
