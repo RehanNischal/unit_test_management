@@ -28,7 +28,7 @@ def update_run(test_run_id: int, test_run_update: TestRunUpdate, db: Session = D
         db=db, test_run_id=test_run_id,
         result=test_run_update.result,
         end_time=test_run_update.end_time,
-        test_results=test_run_update.test_results
+        status=test_run_update.run_status
     )
     if response:
         return response

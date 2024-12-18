@@ -1,8 +1,16 @@
+from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from app.models.test_case_model import TestCase
 from app import constants
+from app.crud.test_suite_crud import validate_test_suite_id
+
 # CRUD operations for Test Case
 def create_test_case(db: Session, name: str, description: str, test_suite_id: int, priority: str, expected_outcome: str):
+    if not validate_test_suite_id(db, test_suite_id):
+        raise HTTPException(
+            status_code=400,
+            detail=f"Test Suite with id {test_suite_id} does not exist"
+        )
     db_test_case = TestCase(name=name, description=description, test_suite_id=test_suite_id, priority=priority, expected_outcome=expected_outcome)
     db.add(db_test_case)
     db.commit()
@@ -38,7 +46,6 @@ def delete_test_case(db: Session, test_case_id: int):
         return {"message": constants.TEST_CASE_NOT_FOUND, "id": test_case_id}
 
 def search_test_cases(db: Session, keyword: str):
-    print("keyword: "+keyword)
     keyword_filter = f"%{keyword}%"
     test_cases = db.query(TestCase).filter(
         ((TestCase.name.ilike(keyword_filter)) | (TestCase.description.ilike(keyword_filter))) &

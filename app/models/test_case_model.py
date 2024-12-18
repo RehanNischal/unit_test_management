@@ -11,7 +11,7 @@ class TestCase(Base):
     description = Column(String)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    test_suite_id = Column(Integer, ForeignKey("test_suites.id"))
+    test_suite_id = Column(Integer, ForeignKey("test_suites.id", ondelete="CASCADE"))
     status = Column(String, default="active")
     priority = Column(String)
     expected_outcome = Column(String)

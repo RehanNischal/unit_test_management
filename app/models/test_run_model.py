@@ -7,7 +7,7 @@ class TestRun(Base):
     __tablename__ = "test_runs"
 
     id = Column(Integer, primary_key=True, index=True)
-    test_suite_id = Column(Integer, ForeignKey("test_suites.id"))
+    test_suite_id = Column(Integer, ForeignKey("test_suites.id", ondelete="CASCADE"))
     run_status = Column(String, default="in_progress")
     result = Column(String, default="pending")
     start_time = Column(DateTime, default=datetime.utcnow)

@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from app.models.test_suite_model import TestSuite
 from app import constants
+
 # CRUD operations for Test Suite
 def create_test_suite(db: Session, name: str, description: str):
     db_test_suite = TestSuite(name=name, description=description)
@@ -35,3 +36,9 @@ def delete_test_suite(db: Session, test_suite_id: int):
         return {"message": constants.TEST_SUIT_SUCCESSFUL_DELETION_MESSAGE, "id": test_suite.id}
     else:
         return {"message": constants.TEST_SUIT_NOT_FOUND, "id": test_suite_id}
+
+def validate_test_suite_id(db: Session, test_suite_id: int):
+    test_suite = db.query(TestSuite).filter(TestSuite.id == test_suite_id).first()
+    if not test_suite:
+        return False
+    return True

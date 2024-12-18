@@ -13,8 +13,7 @@ class TestSuite(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     status = Column(String, default="active")
 
-    # Relationship with TestCase
     # A TestSuite can have many TestCases
-    test_cases = relationship("TestCase", back_populates="test_suite")
+    test_cases = relationship("TestCase", back_populates="test_suite", cascade="all, delete")
     # A TestSuite can have many TestRuns
-    test_runs = relationship("TestRun", back_populates="test_suite")
+    test_runs = relationship("TestRun", back_populates="test_suite", cascade="all, delete")

@@ -22,4 +22,4 @@ class TestRunResponse(BaseModel):
 class TestRunUpdate(BaseModel):
     result: str
     end_time: datetime
-    test_results: List[dict]  # List of individual test case results
+    run_status: str
