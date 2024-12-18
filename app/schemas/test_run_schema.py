@@ -7,6 +7,7 @@ class TestRunCreate(BaseModel):
     test_suite_id: int
     run_status: str
 
+# Test Run Response Schema
 class TestRunResponse(BaseModel):
     id: int
     test_suite_id: int
@@ -19,6 +20,7 @@ class TestRunResponse(BaseModel):
     class Config:
         orm_mode = True
 
+# Test Run Update Schema
 class TestRunUpdate(BaseModel):
     result: str
     end_time: datetime

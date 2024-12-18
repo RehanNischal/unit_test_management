@@ -15,5 +15,5 @@ class TestRun(Base):
     test_results = Column(JSON, default=[])
 
     # Relationship with TestSuite
-    # Each TestRun belongs to one TestSuite
+    # Each TestRun belongs to one TestSuite (Many to One)
     test_suite = relationship("TestSuite", back_populates="test_runs")

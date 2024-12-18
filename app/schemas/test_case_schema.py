@@ -9,6 +9,7 @@ class TestCaseCreate(BaseModel):
     expected_outcome: str
     test_suite_id: int
 
+# Test Case Response Schema
 class TestCaseResponse(BaseModel):
     id: int
     name: str
@@ -23,6 +24,7 @@ class TestCaseResponse(BaseModel):
     class Config:
         orm_mode = True
 
+# Test Case Update Schema
 class TestCaseUpdate(BaseModel):
     name: str
     description: str

@@ -17,5 +17,5 @@ class TestCase(Base):
     expected_outcome = Column(String)
 
     # Relationship with TestSuite
-    # Each TestCase belongs to one TestSuite
+    # Each TestCase belongs to one TestSuite (Many to One)
     test_suite = relationship("TestSuite", back_populates="test_cases")

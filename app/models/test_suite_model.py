@@ -13,7 +13,8 @@ class TestSuite(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     status = Column(String, default="active")
 
-    # A TestSuite can have many TestCases
+    ## All the Test Runs and Test Cases will be deleted automatically if the corresponding suite gets deleted
+    # A TestSuite can have many TestCases (One to Many)
     test_cases = relationship("TestCase", back_populates="test_suite", cascade="all, delete")
-    # A TestSuite can have many TestRuns
+    # A TestSuite can have many TestRuns (One to Many)
     test_runs = relationship("TestRun", back_populates="test_suite", cascade="all, delete")
