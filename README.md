@@ -9,7 +9,7 @@ suites, and test runs
 
 Prerequisites:
 1. Python must be installed in your system (My version is 3.11.4)
-2. Install these packages (if not present): fastapi, uvicorn, sqlalchemy, streamlit, pydantic, sqlite3,  
+2. Install these packages (if not present): fastapi, uvicorn, sqlalchemy, streamlit, pydantic, sqlite3  
 
 Steps For Running The Application:
 1. Open the application folder in two separate terminals
