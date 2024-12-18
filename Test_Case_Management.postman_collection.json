@@ -1,0 +1,428 @@
+{
+	"info": {
+		"_postman_id": "ccc81b96-a49c-455d-b839-9051175904ac",
+		"name": "Test Case Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40461260"
+	},
+	"item": [
+		{
+			"name": "Test Suits",
+			"item": [
+				{
+					"name": "Create Suit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Authentication Tests\",\n  \"description\": \"Testing login and signup functionality\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/test_suites",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"test_suites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Suites",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/test_suites/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"test_suites",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a particular Suit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/test_suites/{suite_id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"test_suites",
+								"{suite_id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Suit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Authentication Tests 1\",\n    \"description\": \"Testing login functionality\",\n    \"status\": \"active\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/test_suites/{suite_id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"test_suites",
+								"{suite_id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Suit",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/test_suites/{suite_id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"test_suites",
+								"{suite_id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test Cases",
+			"item": [
+				{
+					"name": "Create Case",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Valid Login Test\",\n  \"description\": \"Check login with valid credentials\",\n  \"priority\": \"high\",\n  \"expected_outcome\": \"User should successfully log in\",\n  \"test_suite_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/test_cases",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"test_cases"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get cases in Suit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/test_cases/?test_suite_id=14",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"test_cases",
+								""
+							],
+							"query": [
+								{
+									"key": "test_suite_id",
+									"value": "14"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a particular case",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/test_cases/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"test_cases",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a test case",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"InValid Login Test\",\n    \"description\": \"Check login with valid credentials\",\n    \"priority\": \"high\",\n    \"expected_outcome\": \"User should successfully log in\",\n    \"status\": \"active\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/test_cases/{case_id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"test_cases",
+								"{case_id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a case",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/test_cases/{case_id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"test_cases",
+								"{case_id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/test_cases/search/?keyword=test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"test_cases",
+								"search",
+								""
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "test"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Test Cases",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/test_cases/cases",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"test_cases",
+								"cases"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test Runs",
+			"item": [
+				{
+					"name": "Create Run",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"test_suite_id\": 1,\n  \"run_status\": \"in_progress\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/test_runs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"test_runs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Test Runs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/test_runs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"test_runs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a particular run",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/test_runs/{run_id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"test_runs",
+								"{run_id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Run",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n  \"result\": \"Failed\",\n  \"end_time\": \"2024-12-16T17:38:43.970Z\",\n  \"run_status\":\"complete\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/test_runs/{run_id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"test_runs",
+								"{run_id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Run",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/test_runs/{run_id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"test_runs",
+								"{run_id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
