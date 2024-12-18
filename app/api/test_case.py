@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.crud.test_case_crud import create_test_case, get_test_cases, get_test_case, update_test_case, delete_test_case, \
-    search_test_cases
+    search_test_cases, get_all_test_cases
 from app.schemas.test_case_schema import TestCaseCreate, TestCaseResponse, TestCaseUpdate
 from app.database import get_db
 
@@ -24,6 +24,10 @@ def create_test_case_route(test_case: TestCaseCreate, db: Session = Depends(get_
 @router.get("/", response_model=list[TestCaseResponse])
 def read_test_cases(test_suite_id: int, db: Session = Depends(get_db)):
     return get_test_cases(db=db, test_suite_id=test_suite_id)
+
+@router.get("/cases", response_model=list[TestCaseResponse])
+def read_test_suites(db: Session = Depends(get_db)):
+    return get_all_test_cases(db=db)
 
 @router.get("/{test_case_id}", response_model=TestCaseResponse)
 def read_test_case(test_case_id: int, db: Session = Depends(get_db)):

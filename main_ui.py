@@ -21,12 +21,13 @@ from app_ui.test_case_ui import (
     get_test_case_by_id,
     update_test_case_by_id,
     search_test_cases_by_keyword,
-    delete_test_case_by_id
+    delete_test_case_by_id,
+    get_all_cases
 )
 
 # Adding Sidebar Navigation
 st.sidebar.title("Navigation")
-choice = st.sidebar.radio("Choose Module:", ["Test Suites", "Test Cases", "Test Runs"])
+choice = st.sidebar.radio("Choose Testing Module:", ["Test Suites", "Test Cases", "Test Runs"])
 
 if choice == "Test Suites":
 
@@ -59,12 +60,13 @@ elif choice == "Test Cases":
 
     st.title("Test Management System - Test Cases")
 
-    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
         "Create Test Case",
         "View Cases in a Suite",
+        "Search Cases With A Keyword",
         "View A Particular Test case",
         "Update Test Case",
-        "Search Cases With A Keyword",
+        "View All Cases",
         "Delete Test Case"
     ])
 
@@ -75,15 +77,18 @@ elif choice == "Test Cases":
         get_cases_from_suite()
 
     with tab3:
-        get_test_case_by_id()
-
-    with tab4:
-        update_test_case_by_id()
-
-    with tab5:
         search_test_cases_by_keyword()
 
+    with tab4:
+        get_test_case_by_id()
+
+    with tab5:
+        update_test_case_by_id()
+
     with tab6:
+        get_all_cases()
+
+    with tab7:
         delete_test_case_by_id()
 
 elif choice == "Test Runs":

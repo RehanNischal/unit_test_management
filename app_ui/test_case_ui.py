@@ -58,6 +58,31 @@ def get_cases_from_suite():
         except Exception:
             st.error("Failed to connect to the backend")
 
+def get_all_cases():
+    st.header("View All Test Cases")
+    if st.button("Fetch All Test Cases", key="fetch_all_cases"):
+        try:
+            response = requests.get(f"{BACKEND_URL}/test_cases/cases")
+            if response.status_code == 200:
+                test_cases = response.json()
+                if test_cases:
+                    for case in test_cases:
+                        st.subheader(f"Case ID: {case['id']}")
+                        st.write(f"Name: {case['name']}")
+                        st.write(f"Description: {case['description']}")
+                        st.write(f"Status: {case['status']}")
+                        st.write(f"Priority: {case['priority']}")
+                        st.write(f"Expected Outcome: {case['expected_outcome']}")
+                        st.write(f"Created AT: {case['created_at']}")
+                        st.write(f"Updated AT: {case['updated_at']}")
+                        st.write("---")
+                else:
+                    st.info("No test cases found.")
+            else:
+                st.error(f"Error fetching test cases: {response.status_code}")
+        except Exception:
+            st.error("Failed to connect to the backend")
+
 def get_test_case_by_id():
     st.header("View Test Case By ID")
     test_case_id = st.text_input("Enter Test Case ID to Search", key="fetch_case_id")

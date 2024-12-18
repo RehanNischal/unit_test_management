@@ -17,6 +17,9 @@ def create_test_case(db: Session, name: str, description: str, test_suite_id: in
     db.refresh(db_test_case)
     return db_test_case
 
+def get_all_test_cases(db: Session):
+    return db.query(TestCase).all()
+
 def get_test_cases(db: Session, test_suite_id: int):
     return db.query(TestCase).filter(TestCase.test_suite_id == test_suite_id).all()
 
