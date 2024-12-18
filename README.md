@@ -31,4 +31,4 @@ Project Structure:
 - All the files with the endpoint routes are kept in api folder (which is in app folder)
 - All the configuration related urls are in config file
 - All the UI files are kept in app_ui folder excluding the starting file which is main_ui.py
-- The Databse file is kept in the data folder 
+- The Database file is kept in the data folder 
