@@ -7,6 +7,10 @@ teams to create, organize, and track the results of unit tests efficiently. The 
 provide the necessary CRUD (Create, Read, Update, Delete) functionalities for test cases, test
 suites, and test runs
 
+Backend: Python (fastapi)
+Database: SQLite
+UI: Python (streamlit)
+
 Prerequisites:
 1. Python must be installed in your system (My version is 3.11.4)
 2. Install these packages (if not present): fastapi, uvicorn, sqlalchemy, streamlit, pydantic, sqlite3  
