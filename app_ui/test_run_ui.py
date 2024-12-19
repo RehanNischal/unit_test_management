@@ -53,7 +53,7 @@ def view_all_test_runs():
 
 def view_single_test_run():
     st.header("View A Particular Runs")
-    run_id = st.text_input("Enter Test Run ID", key="run_id_fetch")
+    run_id = st.number_input("Enter Test Run ID ", min_value=1, step=1, key="run_id_fetch")
     if st.button("Fetch Test Run", key="fetch_run"):
         try:
             response = requests.get(f"{BACKEND_URL}/test_runs/{run_id}")
@@ -79,8 +79,7 @@ def view_single_test_run():
 
 def update_test_run():
     st.header("Update Test Run")
-    run_id = st.text_input("Enter Test Run ID", key="run_id_update")
-
+    run_id = st.number_input("Enter Test Run ID", min_value=1, step=1, key="run_id_update")
     result = st.selectbox("Test Run Result", ["Passed", "Failed", "In Progress", "Not Run"], key="result")
     end_time = st.text_input("End Time (e.g. 2024-12-16T17:38:43.970Z)", value=str(datetime.utcnow().isoformat()),
                              key="end_time")
@@ -108,7 +107,7 @@ def update_test_run():
 
 def delete_test_run():
     st.header("Delete Test Run")
-    run_id = st.text_input("Enter Run ID to Delete", key="delete_run_id")
+    run_id = st.number_input("Enter Run ID to Delete", min_value=1, step=1, key="delete_run_id")
     if st.button("Delete Test Run", key="delete_run"):
         try:
             response = requests.delete(f"{BACKEND_URL}/test_runs/{run_id}/")

@@ -6,9 +6,9 @@ def add_new_test_case():
     st.header("Add New Test Case")
     name = st.text_input("Name", key="add_case_name")
     description = st.text_area("Description", key="add_case_description")
-    priority = st.text_input("priority", key="add_case_priority")
+    priority = st.selectbox("Priority", ["low", "medium", "high"], key="add_case_priority")
     expected_outcome = st.text_input("expected_outcome", key="add_case_outcome")
-    test_suite_id = st.text_input("test_suite_id", key="add_case_suite_id")
+    test_suite_id = st.number_input("Enter Test Suite ID ", min_value=1, step=1, key="add_case_suite_id")
 
     if st.button("Add Test Case", key="add_case"):
         if not name or not description or not priority or not expected_outcome or not test_suite_id:
@@ -34,7 +34,8 @@ def add_new_test_case():
 
 def get_cases_from_suite():
     st.header("View A Particular Test Suite")
-    suite_id = st.text_input("Enter Suite ID to Search", key="fetch_cases")
+    suite_id = st.number_input("Enter Test Suite ID to Search", min_value=1, step=1, key="fetch_cases")
+
     if st.button("Fetch All Test Suites", key="fetch_all_suites"):
         try:
             response = requests.get(f"{BACKEND_URL}/test_cases/", params={"test_suite_id": suite_id})
@@ -85,7 +86,7 @@ def get_all_cases():
 
 def get_test_case_by_id():
     st.header("View Test Case By ID")
-    test_case_id = st.text_input("Enter Test Case ID to Search", key="fetch_case_id")
+    test_case_id = st.number_input("Enter Test Case ID to Search", min_value=1, step=1, key="fetch_case_id")
 
     if st.button("Fetch Test Case", key="fetch_case"):
         try:
@@ -115,7 +116,7 @@ def get_test_case_by_id():
 
 def update_test_case_by_id():
     st.header("Update Test Case By ID")
-    test_case_id = st.text_input("Enter Test Case ID to Update", key="update_case_id")
+    test_case_id = st.number_input("Enter Test Case ID to Update", min_value=1, step=1, key="update_case_id")
     name = st.text_input("Name", key="update_case_name")
     description = st.text_area("Description", key="update_case_description")
     priority = st.selectbox("Priority", ["low", "medium", "high"], key="update_case_priority")
@@ -180,7 +181,7 @@ def search_test_cases_by_keyword():
 
 def delete_test_case_by_id():
     st.header("Delete Test Case by ID")
-    test_case_id = st.text_input("Enter Test Case ID to Delete", key="delete_case_id")
+    test_case_id = st.number_input("Enter Test Case ID to Delete", min_value=1, step=1, key="delete_case_id")
 
     if st.button("Delete Test Case", key="delete_case_button"):
         if not test_case_id:
