@@ -27,7 +27,7 @@ def view_all_test_suites():
 
 def view_single_test_suite():
     st.header("View A Particular Test Suite")
-    suite_id = st.text_input("Enter Suite ID to Search", key="fetch_a_suite")
+    suite_id = st.number_input("Enter Suite ID to Search", min_value=1, step=1, key="fetch_a_suite")
     if st.button("Fetch The Test Suite", key="fetch_suite"):
         try:
             response = requests.get(f"{BACKEND_URL}/test_suites/{suite_id}")
@@ -69,7 +69,7 @@ def add_test_suite():
 
 def update_test_suite():
     st.header("Update Test Suite")
-    suite_id = st.text_input("Enter Suite ID to Update", key="update_suite_id")
+    suite_id = st.number_input("Enter Suite ID to Update", min_value=1, step=1, key="update_suite_id")
     name = st.text_input("Updated Name", key="update_suite_name")
     description = st.text_area("Updated Description", key="update_suite_description")
     status = st.selectbox("Updated Status", ["Active", "Inactive"], key="update_suite_status")
@@ -92,7 +92,8 @@ def update_test_suite():
 
 def delete_test_suite():
     st.header("Delete Test Suite")
-    suite_id = st.text_input("Enter Suite ID to Delete", key="delete_suite_id")
+    suite_id = st.number_input("Enter Suite ID to Delete", min_value=1, step=1, key="delete_suite_id")
+
     if st.button("Delete Test Suite", key="delete_suite"):
         try:
             response = requests.delete(f"{BACKEND_URL}/test_suites/{suite_id}/")
